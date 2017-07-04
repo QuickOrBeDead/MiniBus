@@ -12,77 +12,78 @@ namespace MiniBus.Sample
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Choose an option to execute:");
-            Console.WriteLine("1  - Send message to queue");
-            Console.WriteLine("2  - Send message to queues in distributed manner");
-            Console.WriteLine("3  - Read message from queue");
-            Console.WriteLine("4  - Read message from queue async");
-            Console.WriteLine("5  - Fail to error queue");
-            Console.WriteLine("6  - Fail to error queue async");
-            Console.WriteLine("7  - Fail fast");
-            Console.WriteLine("8  - Fail fast async");
-            Console.WriteLine("9  - Return error messages to read queue");
-            Console.WriteLine("A  - Fail and discard");
-            Console.WriteLine("B  - Test multiple handlers");
-            Console.WriteLine("X  - exit");
-
-            var selection = Console.ReadKey();
-
-            switch(selection.Key)
+            while (true)
             {
-                case ConsoleKey.D1:
-                    SendDemo();
-                    break;
+                Console.WriteLine("Choose an option to execute:");
+                Console.WriteLine("1  - Send message to queue");
+                Console.WriteLine("2  - Send message to queues in distributed manner");
+                Console.WriteLine("3  - Read message from queue");
+                Console.WriteLine("4  - Read message from queue async");
+                Console.WriteLine("5  - Fail to error queue");
+                Console.WriteLine("6  - Fail to error queue async");
+                Console.WriteLine("7  - Fail fast");
+                Console.WriteLine("8  - Fail fast async");
+                Console.WriteLine("9  - Return error messages to read queue");
+                Console.WriteLine("A  - Fail and discard");
+                Console.WriteLine("B  - Test multiple handlers");
+                Console.WriteLine("X  - exit");
 
-                case ConsoleKey.D2:
-                    SendAutoDistributeDemo();
-                    break;
+                var selection = Console.ReadKey();
 
-                case ConsoleKey.D3:
-                    ReceiveDemo();
-                    break;
+                switch (selection.Key)
+                {
+                    case ConsoleKey.D1:
+                        SendDemo();
+                        break;
 
-                case ConsoleKey.D4:
-                    ReceiveDemoAsync();
-                    break;
+                    case ConsoleKey.D2:
+                        SendAutoDistributeDemo();
+                        break;
 
-                case ConsoleKey.D5:
-                    FailToErrorQueueDemo();
-                    break;
+                    case ConsoleKey.D3:
+                        ReceiveDemo();
+                        break;
 
-                case ConsoleKey.D6:
-                    FailToErrorQueueAsync();
-                    break;
+                    case ConsoleKey.D4:
+                        ReceiveDemoAsync();
+                        break;
 
-                case ConsoleKey.D7:
-                    FailFastDemo();
-                    break;
+                    case ConsoleKey.D5:
+                        FailToErrorQueueDemo();
+                        break;
 
-                case ConsoleKey.D8:
-                    FailFastDemoAsync();
-                    break;
+                    case ConsoleKey.D6:
+                        FailToErrorQueueAsync();
+                        break;
 
-                case ConsoleKey.D9:
-                    ReturnErrorMessagesDemo();
-                    break;
-                    
-                case ConsoleKey.A:
-                    FailAndDiscardDemo();
-                    break;
+                    case ConsoleKey.D7:
+                        FailFastDemo();
+                        break;
 
-                case ConsoleKey.B:
-                    ReceiveMultiplesDemo();
-                    break;
+                    case ConsoleKey.D8:
+                        FailFastDemoAsync();
+                        break;
 
-                case ConsoleKey.X:                    
-                    break;
+                    case ConsoleKey.D9:
+                        ReturnErrorMessagesDemo();
+                        break;
 
-                default:
-                    Console.WriteLine("invalid option");
-                    break;
+                    case ConsoleKey.A:
+                        FailAndDiscardDemo();
+                        break;
+
+                    case ConsoleKey.B:
+                        ReceiveMultiplesDemo();
+                        break;
+
+                    case ConsoleKey.X:
+                        return;
+
+                    default:
+                        Console.WriteLine("invalid option");
+                        break;
+                }
             }
-                        
-            Console.ReadLine();
         }
 
         static void SendDemo()
@@ -115,7 +116,7 @@ namespace MiniBus.Sample
                 scope.Complete();
             }
             
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -143,7 +144,7 @@ namespace MiniBus.Sample
             _bus.Send(p); // MiniBus.messages3
             _bus.Send(p); // MiniBus.messages1
             
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -171,7 +172,7 @@ namespace MiniBus.Sample
             
             _bus.Receive<Person>();
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine(); 
             _bus.Dispose();
         }
@@ -236,7 +237,7 @@ namespace MiniBus.Sample
 
             _bus.Receive<Person>();
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -261,7 +262,7 @@ namespace MiniBus.Sample
             _bus.RegisterHandler(new PersonHandler(true));
             _bus.ReceiveAsync<Person>();
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -290,7 +291,7 @@ namespace MiniBus.Sample
 
             _bus.Receive<Person>();
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -316,7 +317,7 @@ namespace MiniBus.Sample
             _bus.RegisterHandler(new PersonHandler(true));
             _bus.ReceiveAsync<Person>();
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -351,7 +352,7 @@ namespace MiniBus.Sample
                 Console.WriteLine("Couldn't return error messages to the read queue: {0}", ex.Message);
             }
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -380,7 +381,7 @@ namespace MiniBus.Sample
 
             _bus.Receive<Person>();
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
@@ -417,7 +418,7 @@ namespace MiniBus.Sample
             _bus.Send(18);
             _bus.Send(5);
 
-            Console.WriteLine("\nPress a key to exit");
+            Console.WriteLine("\nPress a key to continue");
             Console.ReadLine();
             _bus.Dispose();
         }
